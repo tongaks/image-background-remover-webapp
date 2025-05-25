@@ -1,0 +1,88 @@
+:root {
+	--eerie-black: #0B0B0B;
+	--jet: #333533;
+	--eggshell: #F2ECDD; 
+	--taupe: #483C32;
+	--dark-taupe: #1d1814;
+}
+
+@font-face {
+	font-family: regular;
+	src: url('fonts/SFPRODISPLAYREGULAR.OTF');
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: regular;
+}
+
+body {
+	position: relative;
+	height: 100vh;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	background-color: var(--eggshell);
+}
+
+.hero {
+	background-color: var(--taupe);
+	box-shadow: 11px 13px 1px 5px var(--dark-taupe);
+	transform: translateX(-5px);
+	transform: translateY(-5px);
+	transition: box-shadow .5s, transform .5s;
+	color: white;
+
+	padding: 40px;
+	justify-content: center;
+/*	border-radius: 10px;*/
+}
+
+.hero:hover {
+	transform: translateX(5px);
+	transform: translateY(5px);
+	box-shadow: 5px 6px 1px 2px var(--dark-taupe);
+}
+
+.hero .intro {
+	text-align: center;
+}
+
+.hero .file-input {
+	margin: 30px;
+
+	justify-content: center;
+	text-align: center;
+}
+
+#submit-btn {
+	border: none;
+	padding: 10px;
+	background-color: lightgreen;
+	border-radius: 4px;
+
+	transition: background-color .5s;
+	cursor: pointer;
+}
+
+#submit-btn:hover {
+	background-color: limegreen;
+}
+
+#file-drop {
+	display: none;
+}
+
+.select-file-btn {
+	padding: 10px;
+	background-color: brown;
+	cursor: pointer;
+}
+
+/*input[type="file" i] {*/
+/*	display: none;*/
+/*}*/
