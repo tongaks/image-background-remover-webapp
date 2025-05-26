@@ -27,7 +27,8 @@ bool removeBG(std::string fname) {
 	cv::Mat new_res;
 	cv::merge(channels, new_res);
 
-	cv::imwrite(fname+"png", new_res);
+	std::string path = "../../uploads" + fname + ".png";
+	cv::imwrite(path, new_res);
 	return true;
 }
 
