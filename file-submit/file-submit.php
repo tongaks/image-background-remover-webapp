@@ -61,7 +61,7 @@ if (!isset($_POST['submit'])) {
 		}
 
 		if ($is_uploaded) {
-			system("")
+			system("./file-submit/removeBG/remove-bg " . $upload_path);
 		}
 
 		?>
