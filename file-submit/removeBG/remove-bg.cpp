@@ -27,8 +27,15 @@ bool removeBG(std::string fname) {
 	cv::Mat new_res;
 	cv::merge(channels, new_res);
 
-	std::string path = "../../uploads" + fname + ".png";
+	cv::imshow("mask", mask);
+	cv::imshow("alpha", alpha);
+
+	std::string path = "/var/www/html/uploads/removedBG/" + fname + ".png";
 	cv::imwrite(path, new_res);
+
+	cv::waitKey(0);
+	cv::destroyAllWindows();
+
 	return true;
 }
 
@@ -40,7 +47,13 @@ int main(int argc, char const *argv[]) {
 
 	main_image = cv::imread(path, cv::IMREAD_COLOR);
 
-	if (removeBG(path))
+	if (removeBG(path)) {
+		std::cout << "Successful to remove bg" << '\n';
+		std::cerr << "Successful to remove bg" << '\n';
 		return 0;
-	else return 1;
+	} else {
+		std::cout << "Failed to remove bg" << '\n';
+		std::cerr << "Failed to remove bg" << '\n';
+		return 1;
+	} 
 }
