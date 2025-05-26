@@ -1,6 +1,11 @@
 <?php 
-$file_name = $_POST['file-name'];
- ?>
+
+if (!isset($_POST['submit'])) {
+	header('Location: http://localhost');
+	die();
+}
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -18,31 +23,45 @@ $file_name = $_POST['file-name'];
 		<h2>Filename: <?php echo $file_name; ?> </h2>
 		<?php
 
-		if (isset($_FILES['file-name'])) {
-		    $uploads_dir = '/var/www/html/uploads/';
-		    $file_path = $uploads_dir . basename($_FILES['file-name']['name']);
-		    $file_type = strtolower(pathinfo($file_path, PATHINFO_EXTENSION));		    
-		    $uploadOk = 1;
+		$is_uploaded = false;
 
-		    if (isset($_POST['submit'])) {
-		        $check = getimagesize($_FILES['file-name']['tmp_name']);
-		        if ($check !== false) {
-		            $uploadOk = 1;
-		        } else {
-		            echo "File is not an image.<br>";
-		            $uploadOk = 0;
-		        }
+	    $file_err = $_FILES['file-name']['error'];
+		if (isset($_FILES['file-name']) && $file_err == 0) {
+		    $file_name = $_FILES['file-name']['name'];
+		    $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));		    
+		    $file_size = $_FILES['file-name']['size'];
+		    $file_tmp = $_FILES['file-name']['tmp_name'];
+
+		    $img_types = array('png', 'jpg', 'jpeg');
+
+		    if (in_array($file_type, $img_types)) {
+		    	if ($file_size < 10000000) { //  < 10mb
+
+				    $new_name = uniqid('', true).$file_name;
+				    $upload_path = '/var/www/html/uploads/' . $new_name;
+
+		    		if (move_uploaded_file($file_tmp, $upload_path)) {
+		    			$is_uploaded = true;
+		    		} else {
+			    			echo "image failed to upload to the server.";
+		    		}
+
+		    	} else {
+		    		echo "image file size is too big";
+		    	}
+
+
+		    } else {
+		    	echo "invalid file type";
 		    }
 
-		    if ($uploadOk) {
-		        if (move_uploaded_file($_FILES['file-name']['tmp_name'], $file_path)) {
-		            echo "File uploaded.";
-		        } else {
-		            echo "Failed to upload file.";
-		        }
-		    }
+
 		} else {
-		    echo "No file uploaded.";
+		    echo "No image file uploaded.";
+		}
+
+		if ($is_uploaded) {
+			system("")
 		}
 
 		?>
