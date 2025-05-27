@@ -1,5 +1,7 @@
 <?php 
 
+// phpinfo();
+
 if (!isset($_POST['submit'])) {
 	header('Location: http://localhost');
 	die();
@@ -20,7 +22,6 @@ if (!isset($_POST['submit'])) {
 <div class="hero">
 	<div class="intro">
 		<h1>Your image is now being processed. Please wait.</h1>
-		<h2>Filename: <?php echo $file_name; ?> </h2>
 		<?php
 
 		$is_uploaded = false;
@@ -61,7 +62,21 @@ if (!isset($_POST['submit'])) {
 		}
 
 		if ($is_uploaded) {
-			system("./file-submit/removeBG/remove-bg " . $upload_path);
+
+			$command = "./remove-bg " . escapeshellarg($upload_path);
+			$output = exec($command . " 2>&1", $return_val);
+
+			// echo $output . "<br>";
+			// echo getcwd();
+
+			if (file_exists($output)) {				
+				echo "<img width='200px' src='../" . $output . "'>";
+			} else {
+				echo "Cannot find the image file";
+			}
+
+		} else {
+			echo "Failed to remove the BG";
 		}
 
 		?>

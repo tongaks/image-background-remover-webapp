@@ -1,4 +1,5 @@
 #include <iostream>
+#include <filesystem>
 #include <opencv2/opencv.hpp>
 #include <vector>
 #include "opencv2/imgcodecs.hpp"
@@ -18,7 +19,7 @@ bool removeBG(std::string fname) {
 	cv::bitwise_and(main_image, main_image, res, mask);
 
 	cv::Mat alpha;
-	cv::threshold(mask, alpha, 0, 255, cv::THRESH_BINARY);
+	cv::threshold(mask, alpha, 0, 255, cv::THRESH_BINARY_INV);
 
 	std::vector<cv::Mat> channels;
 	cv::split(res, channels);
@@ -27,33 +28,34 @@ bool removeBG(std::string fname) {
 	cv::Mat new_res;
 	cv::merge(channels, new_res);
 
-	cv::imshow("mask", mask);
-	cv::imshow("alpha", alpha);
 
 	std::string path = "/var/www/html/uploads/removedBG/" + fname + ".png";
+	// std::cout << "path: " << path << '\n'; 
 	cv::imwrite(path, new_res);
 
-	cv::waitKey(0);
-	cv::destroyAllWindows();
+	// cv::imshow("mask", mask);
+	// cv::imshow("alpha", alpha);
+	// cv::waitKey(0);
+	// cv::destroyAllWindows();
 
 	return true;
 }
 
 int main(int argc, char const *argv[]) {
-	std::string path = "";
+	std::string filename = "";
+	std::filesystem::path path;
+
 	if (argc > 1) {
-		path = argv[1];
+		path = std::filesystem::path(argv[1]); 
+		filename = path.filename();
 	}
 
-	main_image = cv::imread(path, cv::IMREAD_COLOR);
+	main_image = cv::imread(argv[1], cv::IMREAD_COLOR);
 
-	if (removeBG(path)) {
-		std::cout << "Successful to remove bg" << '\n';
-		std::cerr << "Successful to remove bg" << '\n';
+	if (removeBG(filename)) {
+		std::cout << "uploads/" << filename << '\n';
 		return 0;
 	} else {
-		std::cout << "Failed to remove bg" << '\n';
-		std::cerr << "Failed to remove bg" << '\n';
 		return 1;
 	} 
 }
