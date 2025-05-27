@@ -1,16 +1,12 @@
-<<<<<<< HEAD
 <div style="justify-content: center;">
 	<h1>ShyLow's image background remover (WIP)</h1>
 	<p>I don't have a webserver yet, and hosted locally (on my computer) for development purpose</p>	
-=======
 <div style="justify-content: center; text-align:center;">
 	<h1>ShyLow's image background remover (WIP)</h1>
->>>>>>> fc904dacbdcb721ca0e42826401d9298ca296aa0
 	<h3>
 		This is one of the digital tools that I'm trying to recreate.<br>
 		Said tools includes file format changer, media downloader, etc...
 	</h3>
-<<<<<<< HEAD
 	<div>
 		<h3>Technologies/languages used</h3>
 		<div style="display: flex;">
@@ -20,7 +16,5 @@
 			<img src="https://github.com/devicons/devicon/blob/v2.16.0/icons/php/php-original.svg" height="70" alt="php icon"/>
 		</div>
 	</div>	
-=======
->>>>>>> fc904dacbdcb721ca0e42826401d9298ca296aa0
 	<img src="readme-img/shylow-img-bg-rmvr.png" width="500px">
 </div>
