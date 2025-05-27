@@ -28,10 +28,19 @@ std::string removeBG(std::string fname) {
 	cv::Mat new_res;
 	cv::merge(channels, new_res);
 
+	cv::imshow("new_res", new_res);
+	cv::imshow("mask", mask);
+	cv::imshow("alpha", alpha);
+
+	cv::waitKey(0);
+	cv::destroyAllWindows();
+
 	std::string path = "/var/www/html/uploads/removedBG/" + fname + ".png";
-	if (cv::imwrite(path, new_res)) {
-		return path;
-	} else return "";
+	// if (cv::imwrite(path, new_res)) {
+	// 	return path;
+	// } else return "";
+
+	return "";
 }
 
 int main(int argc, char const *argv[]) {
