@@ -2,11 +2,10 @@
 	<h1>ShyLow's image background remover (WIP)</h1>
 	<p>I don't have a webserver yet, and hosted locally (on my computer) for development purpose</p>	
 <div style="justify-content: center; text-align:center;">
-	<h1>ShyLow's image background remover (WIP)</h1>
-	<h3>
+	<p>
 		This is one of the digital tools that I'm trying to recreate.<br>
 		Said tools includes file format changer, media downloader, etc...
-	</h3>
+	</p>
 	<div>
 		<h3>Technologies/languages used</h3>
 		<div style="display: flex;">
